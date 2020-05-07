@@ -93,14 +93,13 @@ public:
 
   /*
    * Get the determinant of the matrix, if possible.
-   * If a determinant does not exist, the NO_DET flag is set. TODO
+   * If a determinant does not exist, an error is thrown.
    */
   long double getDeterminant() const;
 
   /*
    * Get the inverse of the matrix, if possible.
-   * If an inverse does not exist, the NO_INV flag is set. A placeholder matrix
-   * with dimensions 1x1 is returned. TODO
+   * If an inverse does not exist, an error is thrown.
    */
   LA_Matrix getInverse() const;
 

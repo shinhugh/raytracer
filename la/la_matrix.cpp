@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <stdexcept>
 #include "la_matrix.h"
+#include "lu_decomposition.h"
 
 // ------------------------------------------------------------
 
@@ -172,7 +173,38 @@ void LA_Matrix::setElements(const std::vector<long double> &elements) {
 
 long double LA_Matrix::getDeterminant() const {
 
-  return 0;
+  if(this->row_count != this->col_count) {
+    // Error
+    throw std::invalid_argument("Cannot calculate determinant for non-square "
+    "matrix.");
+  }
+
+  long double **A;
+  int N;
+  long double Tol;
+  int *P;
+
+  N = this->row_count;
+  A = new long double*[N];
+  for(int i = 0; i < N; i++) {
+    A[i] = new long double[N];
+    for(int j = 0; j < N; j++) {
+      A[i][j] = this->elements.at(i).at(j);
+    }
+  }
+  Tol = 0;
+  P = new int[N + 1];
+
+  LUPDecompose(A, N, Tol, P);
+  long double result = LUPDeterminant(A, P, N);
+
+  for(int i = 0; i < N; i++) {
+    delete[] A[i];
+  }
+  delete[] A;
+  delete[] P;
+
+  return result;
 
 }
 

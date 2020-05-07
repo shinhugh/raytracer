@@ -43,6 +43,10 @@ int main() {
   std::cout << "2 x A x B:\n";
   std::cout << product.getString(1) << "\n";
 
+  product.setElement(0, 0, 20);
+  long double det = product.getDeterminant();
+  std::cout << "Determinant: " << det << "\n";
+
   std::cout << "Exiting test program.\n";
 
   return 0;
