@@ -8,11 +8,12 @@ PATH_LA := $(PATH_ROOT)/la
 PATH_LUD := $(PATH_LA)/ext
 
 # Object files
-OBJ := $(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o $(PATH_ROOT)/test.o
+OBJ := $(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o \
+$(PATH_LA)/la_test.o
 # Libraries
 LIB := $(PATH_LA)/libla.a
 # Executable files
-EXE := $(PATH_ROOT)/test
+EXE := $(PATH_ROOT)/la_test
 
 # Compiler
 CC := g++
@@ -24,12 +25,12 @@ LFLAGS := -L $(PATH_LA)
 # --------------------------------------------------
 # Default target
 
-default: test
+default: la_test
 
 # --------------------------------------------------
 # Build test program
 
-test: $(PATH_ROOT)/test.o $(PATH_LA)/libla.a
+la_test: $(PATH_LA)/la_test.o $(PATH_LA)/libla.a
 	@echo "<---------------------------------------"
 	@echo "Building test program."
 	@$(CC) $(LFLAGS) -o $@ $^ -l la

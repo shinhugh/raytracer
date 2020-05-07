@@ -4,7 +4,7 @@
 
 int main() {
 
-  std::cout << "Starting test program.\n";
+  std::cout << "Starting linear algebra test program.\n";
   std::cout << "\n";
 
   const std::vector<long double> empty;
@@ -75,7 +75,7 @@ int main() {
   std::cout << inv.getString(5) << "\n";
   std::cout << "\n";
 
-  std::cout << "Exiting test program.\n";
+  std::cout << "Exiting linear algebra test program.\n";
   std::cout << "\n";
 
   return 0;
