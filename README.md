@@ -7,6 +7,12 @@ A sample program demonstrating usage of the API is also provided.
 
 **This project is currently being rebuilt from scratch.**
 
+## Sample Output
+
+![Sample output](img/sample_output_1.png)
+
+![Sample output](img/sample_output_2.png)
+
 ## Get Started
 
 *Coming soon!*
@@ -35,3 +41,8 @@ array.
 ## Scene Configuration File
 
 *Coming soon!*
+
+## External Resources
+
+- Wikipedia - Code for matrix LU decomposition
+- FreeImage - Library for translating RGB data into image files
