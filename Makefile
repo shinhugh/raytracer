@@ -28,11 +28,11 @@ LFLAGS := -L $(PATH_LA)
 default: la_test
 
 # --------------------------------------------------
-# Build test program
+# Build linear algebra test program
 
 la_test: $(PATH_LA)/la_test.o $(PATH_LA)/libla.a
 	@echo "<---------------------------------------"
-	@echo "Building test program."
+	@echo "Building linear algebra test program."
 	@$(CC) $(LFLAGS) -o $@ $^ -l la
 	@echo "--------------------------------------->"
 	@echo
