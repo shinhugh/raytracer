@@ -8,7 +8,7 @@
 
 // ------------------------------------------------------------
 
-int main(unsigned int argc, char **argv) {
+int main(int argc, char **argv) {
 
   std::cout << "Starting raytracer program.\n";
 

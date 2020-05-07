@@ -43,7 +43,8 @@ raytracer: $(PATH_ROOT)/sample_program.o $(PATH_SRC)/config_parse.o \
 $(PATH_ROOT)/librt.a
 	@echo "<---------------------------------------"
 	@echo "Building sample raytracer program."
-	@$(CC) $(LFLAGS) -o $@ $^ -l la -l rt
+	@$(CC) $(LFLAGS) -o $@ $(PATH_ROOT)/sample_program.o \
+	$(PATH_SRC)/config_parse.o -l rt
 	@echo "--------------------------------------->"
 	@echo
 
@@ -53,7 +54,7 @@ $(PATH_ROOT)/librt.a
 la_test: $(PATH_LA)/la_test.o $(PATH_LA)/libla.a
 	@echo "<---------------------------------------"
 	@echo "Building linear algebra test program."
-	@$(CC) $(LFLAGS) -o $@ $^ -l la
+	@$(CC) $(LFLAGS) -o $@ $(PATH_LA)/la_test.o -l la
 	@echo "--------------------------------------->"
 	@echo
 
