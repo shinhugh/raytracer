@@ -40,7 +40,11 @@ test: $(PATH_ROOT)/test.o $(PATH_LA)/libla.a
 # Build static library la (linear algebra)
 
 $(PATH_LA)/libla.a: $(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o
-	ar rcs $@ $^
+	@echo "<---------------------------------------"
+	@echo "Building static library la."
+	@ar rcs $@ $^
+	@echo "--------------------------------------->"
+	@echo
 
 # --------------------------------------------------
 # Build object file (.cpp)
