@@ -1,7 +1,15 @@
 # Master makefile
+#
+# Build core API: make
+# Build sample program: make raytracer
+# Clean build: make clean
+
+# --------------------------------------------------
 
 # Project root directory path (containing this Makefile)
 PATH_ROOT := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
+# Raytracer library path
+PATH_SRC := $(PATH_ROOT)/src
 # Linear algebra library path
 PATH_LA := $(PATH_ROOT)/la
 # LU decomposition library path
@@ -9,23 +17,35 @@ PATH_LUD := $(PATH_LA)/ext
 
 # Object files
 OBJ := $(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o \
-$(PATH_LA)/la_test.o
+$(PATH_LA)/la_test.o $(PATH_SRC)/raytracer.o $(PATH_SRC)/scene.o \
+$(PATH_SRC)/config_parse.o $(PATH_ROOT)/sample_program.o
 # Libraries
-LIB := $(PATH_LA)/libla.a
+LIB := $(PATH_LA)/libla.a $(PATH_ROOT)/librt.a
 # Executable files
-EXE := $(PATH_ROOT)/la_test
+EXE := $(PATH_ROOT)/la_test $(PATH_ROOT)/raytracer
 
 # Compiler
 CC := g++
 # Compiler flags
-CFLAGS := -g -Wall -I $(PATH_ROOT) -I $(PATH_LA) -I $(PATH_LUD)
+CFLAGS := -g -Wall -I $(PATH_ROOT) -I $(PATH_LA) -I $(PATH_LUD) -I $(PATH_SRC)
 # Linker flags
-LFLAGS := -L $(PATH_LA)
+LFLAGS := -L $(PATH_LA) -L $(PATH_ROOT)
 
 # --------------------------------------------------
 # Default target
 
-default: la_test
+default: $(PATH_ROOT)/librt.a
+
+# --------------------------------------------------
+# Build sample program
+
+raytracer: $(PATH_ROOT)/sample_program.o $(PATH_SRC)/config_parse.o \
+$(PATH_ROOT)/librt.a
+	@echo "<---------------------------------------"
+	@echo "Building sample raytracer program."
+	@$(CC) $(LFLAGS) -o $@ $^ -l la -l rt
+	@echo "--------------------------------------->"
+	@echo
 
 # --------------------------------------------------
 # Build linear algebra test program
@@ -38,11 +58,22 @@ la_test: $(PATH_LA)/la_test.o $(PATH_LA)/libla.a
 	@echo
 
 # --------------------------------------------------
+# Build static library rt (raytracer)
+
+$(PATH_ROOT)/librt.a: $(PATH_SRC)/raytracer.o $(PATH_SRC)/scene.o \
+$(PATH_LA)/libla.a
+	@echo "<---------------------------------------"
+	@echo "Building static library for raytracer routines."
+	@ar rcs $@ $^
+	@echo "--------------------------------------->"
+	@echo
+
+# --------------------------------------------------
 # Build static library la (linear algebra)
 
 $(PATH_LA)/libla.a: $(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o
 	@echo "<---------------------------------------"
-	@echo "Building static library la."
+	@echo "Building static library for linear algebra routines."
 	@ar rcs $@ $^
 	@echo "--------------------------------------->"
 	@echo

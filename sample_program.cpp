@@ -3,9 +3,8 @@
  */
 
 #include <iostream>
-#include "scene.h"
+#include "rt.h"
 #include "config_parse.h"
-#include "raytracer.h"
 
 // ------------------------------------------------------------
 
