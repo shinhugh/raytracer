@@ -1,7 +1,8 @@
 # Raytracer 3-D Modeling API
 
 Model a scene in 3-dimensional space and render a view into an array of RGB
-values. Written in C++.
+values. Supports point-source/directional lighting, reflections, diffusion,
+etc. Written in C++.
 
 A sample program demonstrating usage of the API is also provided.
 
