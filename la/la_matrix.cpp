@@ -212,8 +212,50 @@ long double LA_Matrix::getDeterminant() const {
 
 LA_Matrix LA_Matrix::getInverse() const {
 
-  LA_Matrix inverse(1, 1);
-  return inverse;
+  if(this->row_count != this->col_count) {
+    // Error
+    throw std::invalid_argument("Cannot calculate inverse for non-square "
+    "matrix.");
+  }
+
+  long double **A;
+  int N;
+  long double Tol;
+  int *P;
+  long double **IA;
+
+  N = this->row_count;
+  A = new long double*[N];
+  IA = new long double*[N];
+  for(int i = 0; i < N; i++) {
+    A[i] = new long double[N];
+    IA[i] = new long double[N];
+    for(int j = 0; j < N; j++) {
+      A[i][j] = this->elements.at(i).at(j);
+    }
+  }
+  Tol = 0;
+  P = new int[N + 1];
+
+  LUPDecompose(A, N, Tol, P);
+  LUPInvert(A, P, N, IA);
+
+  LA_Matrix result(N, N);
+  for(int i = 0; i < N; i++) {
+    for(int j = 0; j < N; j++) {
+      result.elements.at(i).at(j) = IA[i][j];
+    }
+  }
+
+  for(int i = 0; i < N; i++) {
+    delete[] A[i];
+    delete[] IA[i];
+  }
+  delete[] A;
+  delete[] IA;
+  delete[] P;
+
+  return result;
 
 }
 
@@ -224,11 +266,18 @@ std::string LA_Matrix::getString(unsigned int precision) const {
   std::string output;
 
   // Determine the largest number of digits in non-decimal places
+  // Include negative sign as a "digit"
   unsigned long longest = 1;
   for(unsigned int i = 0; i < this->row_count; i++) {
     for(unsigned int j = 0; j < this->col_count; j++) {
-      long long rounded = static_cast<long long>(this->elements.at(i).at(j));
+      long double element = this->elements.at(i).at(j);
+      long long rounded = static_cast<long long>(element);
       unsigned long length = 0;
+      if(element < 0 && element > -1) {
+        length = 2;
+      } else if (element <= -1) {
+        length = 1;
+      }
       while(rounded != 0) {
         length++;
         rounded /= 10;
