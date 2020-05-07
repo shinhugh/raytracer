@@ -1,17 +1,19 @@
 # Raytracer 3-D Modeling API
 
 Model a scene in 3-dimensional space and render a view into an array of RGB
-values.
+values. Written in C++.
 
 A sample program demonstrating usage of the API is also provided.
 
+**This project is currently being rebuilt from scratch.**
+
 ## Get Started
 
-TODO
+*Coming soon!*
 
 ## API
 
-The core API provides:
+The core C++ API provides:
 - Parsing the scene configuration file
 - Raytracing on a scene initialized by the configuration file
 - Generating an array of RGB tuples, 1 tuple per pixel
@@ -32,4 +34,4 @@ array.
 
 ## Scene Configuration File
 
-TODO
+*Coming soon!*
