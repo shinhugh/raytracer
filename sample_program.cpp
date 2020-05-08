@@ -6,7 +6,6 @@
 #include "rt.h"
 #include "config_parse.h"
 
-// ------------------------------------------------------------
 
 int main(int argc, char **argv) {
 
