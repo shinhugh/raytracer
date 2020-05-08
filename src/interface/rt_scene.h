@@ -33,6 +33,16 @@ public:
    */
   RT_Scene();
 
+  /*
+   * Add a shape to the scene.
+   */
+  void addElement(RT_Shape shape);
+
+  /*
+   * Add a light to the scene.
+   */
+  void addElement(RT_Light light);
+
   // TODO
 
 };

@@ -65,6 +65,11 @@ typedef struct RT_Camera {
   // Location and direction of camera
   RT_Ray center_ray;
 
+  // Rotational orientation of camera, specified by ray pointing "up" in
+  // camera's perspective
+  // Ray's origin coordinates are irrelevant; only direction is used
+  RT_Ray up_ray;
+
   // Width of view in pixels
   unsigned int px_width;
 
@@ -74,13 +79,13 @@ typedef struct RT_Camera {
   // Horizontal angle of view
   // Angle between segment from camera to leftmost pixel and segment from camera
   // to rightmost pixel
-  // Cap at 120 degrees
+  // Cap at 175 degrees
   long double view_angle_h;
 
   // Vertical angle of view
   // Angle between segment from camera to uppermost pixel and segment from
   // camera to bottom pixel
-  // Cap at 120 degrees
+  // Cap at 175 degrees
   long double view_angle_v;
 
 } RT_Camera;

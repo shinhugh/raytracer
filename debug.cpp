@@ -11,6 +11,7 @@
 // Render dimensions in pixels
 #define PX_WIDTH 1920
 #define PX_HEIGHT 1080
+// Number of pixels used to describe color for a single pixel (8, 8, 8)
 #define BIT_DEPTH 24
 
 
@@ -27,30 +28,36 @@ int main(int argc, char **argv) {
   // Scene to raytrace on
   RT_Scene scene();
 
-  // Cube
-  RT_Triangle tri_0();
+  // Cube made of 12 triangles
+  // Floor
+  RT_Triangle tri_0(1, 1, 1, 2, 1, 1, 1, 2, 1);
   scene.addElement(tri_0);
-  RT_Triangle tri_1();
+  RT_Triangle tri_1(2, 2, 1, 2, 1, 1, 1, 2, 1);
   scene.addElement(tri_1);
-  RT_Triangle tri_2();
+  // Roof
+  RT_Triangle tri_2(1, 1, 2, 2, 1, 2, 1, 2, 2);
   scene.addElement(tri_2);
-  RT_Triangle tri_3();
+  RT_Triangle tri_3(2, 2, 2, 2, 1, 2, 1, 2, 2);
   scene.addElement(tri_3);
-  RT_Triangle tri_4();
+  // Front
+  RT_Triangle tri_4(1, 1, 1, 2, 1, 1, 1, 1, 2);
   scene.addElement(tri_4);
-  RT_Triangle tri_5();
+  RT_Triangle tri_5(2, 1, 2, 2, 1, 1, 1, 1, 2);
   scene.addElement(tri_5);
-  RT_Triangle tri_6();
+  // Back
+  RT_Triangle tri_6(1, 2, 1, 2, 2, 1, 1, 2, 2);
   scene.addElement(tri_6);
-  RT_Triangle tri_7();
+  RT_Triangle tri_7(2, 2, 2, 2, 2, 1, 1, 2, 2);
   scene.addElement(tri_7);
-  RT_Triangle tri_8();
+  // Left
+  RT_Triangle tri_8(1, 2, 1, 1, 1, 1, 1, 2, 2);
   scene.addElement(tri_8);
-  RT_Triangle tri_9();
+  RT_Triangle tri_9(1, 1, 2, 1, 1, 1, 1, 2, 2);
   scene.addElement(tri_9);
-  RT_Triangle tri_10();
+  // Right
+  RT_Triangle tri_10(2, 2, 1, 2, 1, 1, 2, 2, 2);
   scene.addElement(tri_10);
-  RT_Triangle tri_11();
+  RT_Triangle tri_11(2, 1, 2, 2, 1, 1, 2, 2, 2);
   scene.addElement(tri_11);
 /*
   // Sphere
@@ -70,7 +77,27 @@ int main(int argc, char **argv) {
   std::cout << "Configuring camera...";
 
   // Camera to raytrace from
-  RT_Camera camera();
+  RT_Camera camera;
+  RT_Ray camera_center_ray;
+  camera_center_ray.origin_x = 0;
+  camera_center_ray.origin_y = -4;
+  camera_center_ray.origin_z = 0;
+  camera_center_ray.dir_x = 0;
+  camera_center_ray.dir_y = 1;
+  camera_center_ray.dir_z = 0;
+  camera.center_ray = camera_center_ray;
+  RT_Ray camera_up_ray;
+  camera_up_ray.origin_x = 0;
+  camera_up_ray.origin_y = 0;
+  camera_up_ray.origin_z = 0;
+  camera_up_ray.dir_x = 0;
+  camera_up_ray.dir_y = 0;
+  camera_up_ray.dir_z = 1;
+  camera.up_ray = camera_up_ray;
+  camera.px_width = PX_WIDTH;
+  camera.px_height = PX_HEIGHT;
+  camera.px_angle_h = 100;
+  camera.px_angle_v = 62;
 
   std::cout << " Complete.\n";
 

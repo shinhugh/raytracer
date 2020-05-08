@@ -21,14 +21,29 @@ class RT_Triangle : public RT_Shape {
 
 private:
 
-  // TODO
+  // Point 1's location
+  long double pt_1_x;
+  long double pt_1_y;
+  long double pt_1_z;
+  // Point 2's location
+  long double pt_2_x;
+  long double pt_2_y;
+  long double pt_2_z;
+  // Point 3's location
+  long double pt_3_x;
+  long double pt_3_y;
+  long double pt_3_z;
 
 public:
 
   /*
    * Constructor
+   * The triangle is specified by the x, y, and z-coordinates for all 3 of
+   * its points.
    */
-  RT_Triangle(); // TODO
+  RT_Triangle(long double pt_1_x, long double pt_1_y, long double pt_1_z,
+  long double pt_2_x, long double pt_2_y, long double pt_2_z,
+  long double pt_3_x, long double pt_3_y, long double pt_3_z);
 
   // TODO
 
