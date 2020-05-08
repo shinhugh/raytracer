@@ -1,34 +1,28 @@
 /*
- * A subclass of the class RT_Shape, providing triangles to a raytracer scene.
+ * A generic light source in a raytracer scene.
  *
  * This file holds definitions for the following types:
- * - class RT_Triangle
+ * - abstract class RT_Light
  *
  * Instead of this file, the user should #include rt.h.
  */
 
-#ifndef RT_TRIANGLE_H
-#define RT_TRIANGLE_H
-
-#include "rt_shape.h"
+#ifndef RT_LIGHT_H
+#define RT_LIGHT_H
 
 // ------------------------------------------------------------
 
 /*
- * A triangle in 3-dimensional space.
+ * A generic light source in 3-dimensional space.
+ * This is an abstract class; only its subclasses can be instantiated.
  */
-class RT_Triangle : public RT_Shape {
+class RT_Light {
 
-private:
+protected:
 
   // TODO
 
 public:
-
-  /*
-   * Constructor
-   */
-  RT_Triangle(); // TODO
 
   // TODO
 

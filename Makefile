@@ -19,6 +19,7 @@ PATH_LUD := $(PATH_LA)/ext
 OBJ := $(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o \
 $(PATH_SRC)/rt_raytracer.o $(PATH_SRC)/rt_scene.o \
 $(PATH_SRC)/rt_shape.o $(PATH_SRC)/rt_triangle.o $(PATH_SRC)/rt_sphere.o \
+$(PATH_SRC)/rt_light.o $(PATH_SRC)/rt_light_pt.o $(PATH_SRC)/rt_light_dir.o \
 $(PATH_ROOT)/config_parse.o $(PATH_ROOT)/sample_program.o $(PATH_LA)/la_test.o
 # Libraries
 LIB := $(PATH_LA)/libla.a $(PATH_ROOT)/librt.a
@@ -66,6 +67,7 @@ $(PATH_LA)/la_test.o $(PATH_LA)/libla.a
 $(PATH_ROOT)/librt.a: \
 $(PATH_SRC)/rt_raytracer.o $(PATH_SRC)/rt_scene.o \
 $(PATH_SRC)/rt_shape.o $(PATH_SRC)/rt_triangle.o $(PATH_SRC)/rt_sphere.o \
+$(PATH_SRC)/rt_light.o $(PATH_SRC)/rt_light_pt.o $(PATH_SRC)/rt_light_dir.o \
 $(PATH_LA)/libla.a
 	@echo "<---------------------------------------"
 	@echo "Building static library for raytracer routines."

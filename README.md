@@ -27,6 +27,9 @@ not matter):
     - rt_shape.h
     - rt_triangle.h
     - rt_sphere.h
+    - rt_light.h
+    - rt_light_pt.h
+    - rt_light_dir.h
     - rt_scene.h
     - rt_raytracer.h
     - librt.a
@@ -67,9 +70,9 @@ feedback on the process.
 ## API
 
 The core C++ API provides:
-- Configuration of a scene, stored in a single object
+- Configuration of a scene (shapes, lights), stored in a single object
 
-- Configuration of a camera, stored in a single object
+- Configuration of a camera (view perspective), stored in a single object
 
 - Raytracing on a scene from the perspective of a camera
 
@@ -111,10 +114,30 @@ cannot be instantiated.
 
 - `class RT_Sphere` - A sphere in the scene. This is a subclass of `RT_Shape`.
 
+#### File `rt_light.h`:
+
+- `class RT_Light` *(abstract)* - A generic light source in the scene shining
+upon all the shapes in a scene. It holds attributes common to all types of
+lights. This class cannot be instantiated.
+
+#### File `rt_light_pt.h`:
+
+- `class RT_Light_Pt` - A point light source with a specific location in the
+scene, shining in all directions from that point. This is a subclass of
+`RT_Light`.
+
+#### File `rt_light_dir.h`:
+
+- `class RT_Light_Dir` - A directional light source without a specific location
+in the scene. This shines upon the entire scene from an unspecified source
+beyond the scene, shining only in a single direction. This is a subclass of
+`RT_Light`.
+
 #### File `rt_scene.h`:
 
 - `class RT_Scene` - A scene to be rendered by the raytracer. This holds all the
-various shapes with their configurations within the 3-dimensional space.
+various shapes and lights with their configurations within the 3-dimensional
+space.
 
 #### File `rt_raytracer.h`:
 

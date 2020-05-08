@@ -1,5 +1,5 @@
 /*
- * Part of a raytracer scene.
+ * A generic shape in a raytracer scene.
  *
  * This file holds definitions for the following types:
  * - abstract class RT_Shape
@@ -13,7 +13,7 @@
 // ------------------------------------------------------------
 
 /*
- * A generic shape in 3-dimensional space
+ * A generic shape in 3-dimensional space.
  * This is an abstract class; only its subclasses can be instantiated.
  */
 class RT_Shape {

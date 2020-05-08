@@ -1,23 +1,24 @@
 /*
- * A subclass of the class RT_Shape, providing triangles to a raytracer scene.
+ * A subclass of the class RT_Light, providing point lights with a source
+ * location.
  *
  * This file holds definitions for the following types:
- * - class RT_Triangle
+ * - class RT_Light_Pt
  *
  * Instead of this file, the user should #include rt.h.
  */
 
-#ifndef RT_TRIANGLE_H
-#define RT_TRIANGLE_H
+#ifndef RT_LIGHT_PT_H
+#define RT_LIGHT_PT_H
 
-#include "rt_shape.h"
+#include "rt_light.h"
 
 // ------------------------------------------------------------
 
 /*
- * A triangle in 3-dimensional space.
+ * A point light source in 3-dimensional space.
  */
-class RT_Triangle : public RT_Shape {
+class RT_Light_Pt : public RT_Light {
 
 private:
 
@@ -28,7 +29,7 @@ public:
   /*
    * Constructor
    */
-  RT_Triangle(); // TODO
+  RT_Light_Pt(); // TODO
 
   // TODO
 

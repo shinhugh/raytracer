@@ -16,7 +16,7 @@
 // ------------------------------------------------------------
 
 /*
- * A set of shapes and lights in 3-dimensional space
+ * A set of shapes and lights in 3-dimensional space.
  * Feed into the raytracer with a camera configuration to get an RGB grid
  * rendering.
  */

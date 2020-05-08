@@ -1,5 +1,6 @@
 /*
- * Raytracer algorithm that generates an array of RGB tuples, one for each pixel
+ * Raytracer algorithm that generates an array of RGB tuples, one for each
+ * pixel.
  *
  * This file holds definitions for the following types:
  * - struct RT_RGB
@@ -22,7 +23,7 @@
 // ------------------------------------------------------------
 
 /*
- * Tuple holding color values (red, green, blue) for a pixel
+ * Tuple holding color values (red, green, blue) for a pixel.
  */
 typedef struct RT_RGB {
 
@@ -36,7 +37,7 @@ typedef struct RT_RGB {
 // ------------------------------------------------------------
 
 /*
- * A ray in 3-dimensional space, specified by a starting point and a direction
+ * A ray in 3-dimensional space, specified by a starting point and a direction.
  */
 typedef struct RT_Ray {
 
@@ -55,7 +56,7 @@ typedef struct RT_Ray {
 // ------------------------------------------------------------
 
 /*
- * A camera with a location and direction in 3-dimensional space
+ * A camera with a location and direction in 3-dimensional space.
  * This contains all the information required by the raytracer that isn't
  * related to the scene itself.
  */

@@ -1,5 +1,5 @@
 /*
- * Interface for the core raytracer API
+ * Interface for the core raytracer API.
  *
  * This file does not introduce new content. It simply provides an easy way
  * for the user to attain an interface to the entire core API.
@@ -20,6 +20,21 @@
  *
  * rt_sphere.h defines the following:
  * - class RT_Sphere
+ *
+ * ------------------------------------------------------------
+ *
+ * rt_light.h defines the following:
+ * - abstract class RT_Light
+ *
+ * ------------------------------------------------------------
+ *
+ * rt_light_pt.h defines the following:
+ * - class RT_Light_Pt
+ *
+ * ------------------------------------------------------------
+ *
+ * rt_light_dir.h defines the following:
+ * - class RT_Light_Dir
  *
  * ------------------------------------------------------------
  *
@@ -46,6 +61,9 @@
  *   - rt_shape.h
  *   - rt_triangle.h
  *   - rt_sphere.h
+ *   - rt_light.h
+ *   - rt_light_pt.h
+ *   - rt_light_dir.h
  *   - rt_scene.h
  *   - rt_raytracer.h
  *   - librt.a
@@ -60,6 +78,12 @@
 #ifndef RT_H
 #define RT_H
 
+#include "rt_shape.h"
+#include "rt_triangle.h"
+#include "rt_sphere.h"
+#include "rt_light.h"
+#include "rt_light_pt.h"
+#include "rt_light_dir.h"
 #include "rt_scene.h"
 #include "rt_raytracer.h"
 

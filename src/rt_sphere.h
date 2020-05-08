@@ -1,5 +1,5 @@
 /*
- * A subclass of the class RT_Shape, providing spheres to a raytracer scene
+ * A subclass of the class RT_Shape, providing spheres to a raytracer scene.
  *
  * This file holds definitions for the following types:
  * - class RT_Sphere
@@ -15,7 +15,7 @@
 // ------------------------------------------------------------
 
 /*
- * A sphere in 3-dimensional space
+ * A sphere in 3-dimensional space.
  */
 class RT_Sphere : public RT_Shape {
 
