@@ -21,18 +21,25 @@ A sample program demonstrating usage of the API is also provided.
 1. Run `make` in this project's root directory. This generates the file
 `librt.a`, which is the static library for the raytracer algorithm.
 
-2. Copy the following files into your project's file structure (location does
-not matter):
-    - rt.h
-    - rt_shape.h
-    - rt_triangle.h
-    - rt_sphere.h
-    - rt_light.h
-    - rt_light_pt.h
-    - rt_light_dir.h
-    - rt_scene.h
-    - rt_raytracer.h
-    - librt.a
+2. If you wish to remove all unnecessary files, you may do so, but the
+following files must exist in order to use the API (at any location):
+    - `rt.h`
+    - `rt_shape.h`
+    - `rt_triangle.h`
+    - `rt_sphere.h`
+    - `rt_light.h`
+    - `rt_light_pt.h`
+    - `rt_light_dir.h`
+    - `rt_scene.h`
+    - `rt_raytracer.h`
+    - `librt.a`
+
+  All the listed `*.h` files exist in `/src/interface/`. `librt.a` is generated
+  by `make` and placed in the project root directory `/`.
+
+  All other files may be deleted. The listed files may be placed at any
+  location. Keep in mind that it may make things easier to manage if they all
+  reside in a single directory.
 
 
 3. Within your project, in whichever file you'd like to utilize the raytracer
@@ -47,6 +54,8 @@ library, add:
     ```shell
     g++ -I [path to dir containing header files] -c my_code.cpp
     ```
+    If you decide to keep the files in multiple directories, use multiple
+    instances of `-I [path]`.
 
 5. When building an executable, add the options `-L [path]` and `-l [library]`
 as the following:
@@ -83,8 +92,8 @@ Note:
 populates an array of the RGB tuples that make up an image, which the user can
 filter/render as desired. To see how to render this output into an image file,
 refer to the source code for the provided sample program
-(`sample_program.cpp`). It is very straightforward, and it contains plenty of
-comments.
+(`/sample/sample_program.cpp`). It is very straightforward, and it contains
+plenty of comments.
 
 - Parsing of the scene configuration file is also not part of the core API, but
 an implementation is provided to supplement the sample program. If the provided
@@ -97,7 +106,7 @@ there should be no issues for the raytracer.
 Although the user only needs to `#include "rt.h"`, the definitions are
 distributed amongst various files so it may be daunting at first to learn the
 interface. The locations of the definitions are as below. Take a peek inside
-the header files for more details.
+the header files in `/src/interface/` for more details.
 
 #### File `rt_shape.h`:
 
@@ -179,7 +188,7 @@ raytracer algorithm using both the `RT_Scene` and `RT_Camera` objects as input.
 This generates an array of RGB tuples, where each pixel gets its own tuple.
 This is the core part of the API and is by far the most computation-heavy.
 
-3. Utilize the FreeImage library to generate and write to disk a .jpg image
+3. Utilize the FreeImage library to generate and write to disk a .png image
 file from the RGB array. This is done directly in the main function. The image
 should be saved in the same directory as the sample program executable.
 

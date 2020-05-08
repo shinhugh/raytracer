@@ -8,30 +8,34 @@
 
 # Project root directory path (containing this Makefile)
 PATH_ROOT := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-# Raytracer source code path
+# Core API source code path
 PATH_SRC := $(PATH_ROOT)/src
+# Core API header files path (interfaces for user)
+PATH_INT := $(PATH_SRC)/interface
 # Linear algebra library path
 PATH_LA := $(PATH_ROOT)/la
 # LU decomposition library path
 PATH_LUD := $(PATH_LA)/ext
+# Sample program path
+PATH_SAMP := $(PATH_ROOT)/sample
+# FreeImage path
+PATH_FI := $(PATH_ROOT)/FreeImage
 
 # Object files
-OBJ := $(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o \
-$(PATH_SRC)/rt_raytracer.o $(PATH_SRC)/rt_scene.o \
-$(PATH_SRC)/rt_shape.o $(PATH_SRC)/rt_triangle.o $(PATH_SRC)/rt_sphere.o \
-$(PATH_SRC)/rt_light.o $(PATH_SRC)/rt_light_pt.o $(PATH_SRC)/rt_light_dir.o \
-$(PATH_ROOT)/config_parse.o $(PATH_ROOT)/sample_program.o $(PATH_LA)/la_test.o
+OBJ := $(PATH_ROOT)/*.o $(PATH_SRC)/*.o $(PATH_INT)/*.o $(PATH_LA)/*.o \
+$(PATH_LUD)/*.o $(PATH_SAMP)/*.o
 # Libraries
 LIB := $(PATH_LA)/libla.a $(PATH_ROOT)/librt.a
 # Executable files
-EXE := $(PATH_ROOT)/la_test $(PATH_ROOT)/raytracer
+EXE := $(PATH_ROOT)/raytracer $(PATH_ROOT)/debug $(PATH_ROOT)/la_test
 
 # Compiler
 CC := g++
 # Compiler flags
-CFLAGS := -g -Wall -I $(PATH_ROOT) -I $(PATH_SRC) -I $(PATH_LA) -I $(PATH_LUD)
+CFLAGS := -g -Wall -I $(PATH_INT) -I $(PATH_LA) -I $(PATH_LUD) -I $(PATH_SAMP) \
+-I $(PATH_FI)
 # Linker flags
-LFLAGS := -L $(PATH_LA) -L $(PATH_ROOT)
+LFLAGS := -L $(PATH_LA) -L $(PATH_ROOT) -L $(PATH_FI)
 
 # --------------------------------------------------
 # Default target
@@ -39,14 +43,25 @@ LFLAGS := -L $(PATH_LA) -L $(PATH_ROOT)
 default: $(PATH_ROOT)/librt.a
 
 # --------------------------------------------------
+# Build debug program
+
+debug: \
+$(PATH_ROOT)/debug.o $(PATH_ROOT)/librt.a
+	@echo "<---------------------------------------"
+	@echo "Building debug program."
+	@$(CC) $(LFLAGS) -o $@ $< -l rt -l freeimageplus
+	@echo "--------------------------------------->"
+	@echo
+
+# --------------------------------------------------
 # Build sample program
 
 raytracer: \
-$(PATH_ROOT)/sample_program.o $(PATH_ROOT)/config_parse.o $(PATH_ROOT)/librt.a
+$(PATH_SAMP)/sample_program.o $(PATH_SAMP)/config_parse.o $(PATH_ROOT)/librt.a
 	@echo "<---------------------------------------"
 	@echo "Building sample raytracer program."
-	@$(CC) $(LFLAGS) -o $@ $(PATH_ROOT)/sample_program.o \
-	$(PATH_ROOT)/config_parse.o -l rt
+	@$(CC) $(LFLAGS) -o $@ $(PATH_SAMP)/sample_program.o \
+	$(PATH_SAMP)/config_parse.o -l rt -l freeimageplus
 	@echo "--------------------------------------->"
 	@echo
 
@@ -62,7 +77,7 @@ $(PATH_LA)/la_test.o $(PATH_LA)/libla.a
 	@echo
 
 # --------------------------------------------------
-# Build static library rt (raytracer)
+# Build static library rt (raytracer core API)
 
 $(PATH_ROOT)/librt.a: \
 $(PATH_SRC)/rt_raytracer.o $(PATH_SRC)/rt_scene.o \
