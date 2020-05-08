@@ -17,43 +17,41 @@ A sample program demonstrating usage of the API is also provided.
 ## Get Started
 
 #### Generating and using the core API
-<br>
 
 1. Run `make` in this project's root directory. This generates the file
 `librt.a`, which is the static library for the raytracer algorithm.
 
 2. Copy the following files into your project's file structure (location does
 not matter):
-  - rt.h
-  - rt_shape.h
-  - rt_triangle.h
-  - rt_sphere.h
-  - rt_scene.h
-  - rt_raytracer.h
-  - librt.a
+    - rt.h
+    - rt_shape.h
+    - rt_triangle.h
+    - rt_sphere.h
+    - rt_scene.h
+    - rt_raytracer.h
+    - librt.a
 
 
 3. Within your project, in whichever file you'd like to utilize the raytracer
 library, add:
-```c++
-#include "rt.h"
-```
-Note that the other header files are not directly `#include`'d, as `rt.h`
-already does that.
+    ```c++
+    #include "rt.h"
+    ```
+    Note that the other header files are not directly `#include`'d, as `rt.h`
+    already does that.
 
 4. When compiling your source code, add the option `-I [path]` as the following:
-```shell
-g++ -I [path to dir containing header files] -c my_code.cpp
-```
+    ```shell
+    g++ -I [path to dir containing header files] -c my_code.cpp
+    ```
 
 5. When building an executable, add the options `-L [path]` and `-l [library]`
 as the following:
-```shell
-g++ -L [path to dir containing librt.a] my_code.o -l rt
-```
+    ```shell
+    g++ -L [path to dir containing librt.a] my_code.o -l rt
+    ```
 
 #### Generating and running the sample program
-<br>
 
 1. Run `make raytracer` in this project's root directory. This generates the
 file `raytracer`, which is the executable for the sample program.
@@ -99,31 +97,26 @@ interface. The locations of the definitions are as below. Take a peek inside
 the header files for more details.
 
 #### File `rt_shape.h`:
-<br>
 
 - `class RT_Shape` *(abstract)* - A generic shape in the scene to be rendered by
 the raytracer. It holds attributes common to all types of shapes. This class
 cannot be instantiated.
 
 #### File `rt_triangle.h`:
-<br>
 
 - `class RT_Triangle` - A triangle in the scene. This is a subclass of
 `RT_Shape`.
 
 #### File `rt_sphere.h`:
-<br>
 
 - `class RT_Sphere` - A sphere in the scene. This is a subclass of `RT_Shape`.
 
 #### File `rt_scene.h`:
-<br>
 
 - `class RT_Scene` - A scene to be rendered by the raytracer. This holds all the
 various shapes with their configurations within the 3-dimensional space.
 
 #### File `rt_raytracer.h`:
-<br>
 
 - `struct RT_RGB` - A tuple holding color values (red, green, blue) for a pixel.
 
