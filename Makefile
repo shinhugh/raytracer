@@ -40,8 +40,8 @@ default: $(PATH_ROOT)/librt.a
 # --------------------------------------------------
 # Build sample program
 
-raytracer: $(PATH_ROOT)/sample_program.o $(PATH_ROOT)/config_parse.o \
-$(PATH_ROOT)/librt.a
+raytracer: \
+$(PATH_ROOT)/sample_program.o $(PATH_ROOT)/config_parse.o $(PATH_ROOT)/librt.a
 	@echo "<---------------------------------------"
 	@echo "Building sample raytracer program."
 	@$(CC) $(LFLAGS) -o $@ $(PATH_ROOT)/sample_program.o \
@@ -52,7 +52,8 @@ $(PATH_ROOT)/librt.a
 # --------------------------------------------------
 # Build linear algebra test program
 
-la_test: $(PATH_LA)/la_test.o $(PATH_LA)/libla.a
+la_test: \
+$(PATH_LA)/la_test.o $(PATH_LA)/libla.a
 	@echo "<---------------------------------------"
 	@echo "Building linear algebra test program."
 	@$(CC) $(LFLAGS) -o $@ $(PATH_LA)/la_test.o -l la
@@ -62,7 +63,8 @@ la_test: $(PATH_LA)/la_test.o $(PATH_LA)/libla.a
 # --------------------------------------------------
 # Build static library rt (raytracer)
 
-$(PATH_ROOT)/librt.a: $(PATH_SRC)/rt_raytracer.o $(PATH_SRC)/rt_scene.o \
+$(PATH_ROOT)/librt.a: \
+$(PATH_SRC)/rt_raytracer.o $(PATH_SRC)/rt_scene.o \
 $(PATH_SRC)/rt_shape.o $(PATH_SRC)/rt_triangle.o $(PATH_SRC)/rt_sphere.o \
 $(PATH_LA)/libla.a
 	@echo "<---------------------------------------"
@@ -74,7 +76,8 @@ $(PATH_LA)/libla.a
 # --------------------------------------------------
 # Build static library la (linear algebra)
 
-$(PATH_LA)/libla.a: $(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o
+$(PATH_LA)/libla.a: \
+$(PATH_LA)/la_matrix.o $(PATH_LUD)/lu_decomposition.o
 	@echo "<---------------------------------------"
 	@echo "Building static library for linear algebra routines."
 	@ar rcs $@ $^
