@@ -39,7 +39,12 @@ int main(int argc, char **argv) {
 
   std::cout << "Running raytracer algorithm on scene...";
 
-  std::vector<RT_RGB> render = raytrace(scene, camera);
+  RT_RGB background;
+  background.red = 0;
+  background.green = 0;
+  background.blue = 0;
+
+  std::vector<RT_RGB> render = raytrace(scene, camera, background);
 
   std::cout << " Complete.\n";
 

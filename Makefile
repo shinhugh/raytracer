@@ -28,6 +28,8 @@ $(PATH_LUD)/*.o $(PATH_SAMP)/*.o
 LIB := $(PATH_LA)/libla.a $(PATH_ROOT)/librt.a
 # Executable files
 EXE := $(PATH_ROOT)/raytracer $(PATH_ROOT)/debug $(PATH_ROOT)/la_test
+# Other files created by make
+MADE := $(PATH_ROOT)/render_debug.png
 
 # Compiler
 CC := g++

@@ -11,6 +11,7 @@
 #ifndef RT_SCENE_H
 #define RT_SCENE_H
 
+#include <vector>
 #include "rt_shape.h"
 
 // ------------------------------------------------------------
@@ -24,14 +25,13 @@ class RT_Scene {
 
 private:
 
-  // TODO
+  // Shapes
+  std::vector<RT_Shape> shapes;
+
+  // Light sources
+  std::vector<RT_Light> lights;
 
 public:
-
-  /*
-   * Constructor
-   */
-  RT_Scene();
 
   /*
    * Add a shape to the scene.
@@ -42,8 +42,6 @@ public:
    * Add a light to the scene.
    */
   void addElement(RT_Light light);
-
-  // TODO
 
 };
 

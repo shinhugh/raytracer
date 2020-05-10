@@ -4,4 +4,18 @@
 
 #include "rt_scene.h"
 
-// TODO
+// ------------------------------------------------------------
+
+void RT_Scene::addElement(RT_Shape shape) {
+
+  this->shapes.push_back(shape);
+
+}
+
+// ------------------------------------------------------------
+
+void RT_Scene::addElement(RT_Light light) {
+
+  this->lights.push_back(light);
+
+}

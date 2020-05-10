@@ -13,6 +13,8 @@
 #define PX_HEIGHT 1080
 // Number of pixels used to describe color for a single pixel (8, 8, 8)
 #define BIT_DEPTH 24
+// Horizontal angle of view, in radians
+#define AOV_H (M_PI / 2)
 
 
 int main(int argc, char **argv) {
@@ -78,26 +80,19 @@ int main(int argc, char **argv) {
 
   // Camera to raytrace from
   RT_Camera camera;
-  RT_Ray camera_center_ray;
-  camera_center_ray.origin_x = 0;
-  camera_center_ray.origin_y = -4;
-  camera_center_ray.origin_z = 0;
-  camera_center_ray.dir_x = 0;
-  camera_center_ray.dir_y = 1;
-  camera_center_ray.dir_z = 0;
-  camera.center_ray = camera_center_ray;
-  RT_Ray camera_up_ray;
-  camera_up_ray.origin_x = 0;
-  camera_up_ray.origin_y = 0;
-  camera_up_ray.origin_z = 0;
-  camera_up_ray.dir_x = 0;
-  camera_up_ray.dir_y = 0;
-  camera_up_ray.dir_z = 1;
-  camera.up_ray = camera_up_ray;
+  camera.origin_x = 0;
+  camera.origin_y = -4;
+  camera.origin_z = 0;
+  camera.dir_x = 0;
+  camera.dir_y = 1;
+  camera.dir_z = 0;
+  camera.up_x = 0;
+  camera.up_y = 0;
+  camera.up_z = 1;
   camera.px_width = PX_WIDTH;
   camera.px_height = PX_HEIGHT;
-  camera.px_angle_h = 100;
-  camera.px_angle_v = 62;
+  camera.px_angle_h = AOV_H;
+  camera.px_angle_v = proportional_aov(AOV_H, PX_WIDTH, PX_HEIGHT);
 
   std::cout << " Complete.\n";
 
@@ -107,7 +102,12 @@ int main(int argc, char **argv) {
 
   std::cout << "Running raytracer algorithm on scene...";
 
-  std::vector<RT_RGB> render = raytrace(scene, camera);
+  RT_RGB background;
+  background.red = 0;
+  background.green = 0;
+  background.blue = 0;
+
+  std::vector<RT_RGB> render = raytrace(scene, camera, background);
 
   std::cout << " Complete.\n";
 

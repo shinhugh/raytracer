@@ -62,13 +62,21 @@ typedef struct RT_Ray {
  */
 typedef struct RT_Camera {
 
-  // Location and direction of camera
-  RT_Ray center_ray;
+  // Location of camera
+  long double origin_x;
+  long double origin_y;
+  long double origin_z;
 
-  // Rotational orientation of camera, specified by ray pointing "up" in
+  // Direction of camera
+  long double dir_x;
+  long double dir_y;
+  long double dir_z;
+
+  // Rotational orientation of camera, specified by vector pointing "up" in
   // camera's perspective
-  // Ray's origin coordinates are irrelevant; only direction is used
-  RT_Ray up_ray;
+  long double up_x;
+  long double up_y;
+  long double up_z;
 
   // Width of view in pixels
   unsigned int px_width;
@@ -76,16 +84,16 @@ typedef struct RT_Camera {
   // Height of view in pixels
   unsigned int px_height;
 
-  // Horizontal angle of view
+  // Horizontal angle of view, in radians
   // Angle between segment from camera to leftmost pixel and segment from camera
   // to rightmost pixel
-  // Cap at 175 degrees
+  // Cap at 5 * PI / 6
   long double view_angle_h;
 
-  // Vertical angle of view
+  // Vertical angle of view, in radians
   // Angle between segment from camera to uppermost pixel and segment from
   // camera to bottom pixel
-  // Cap at 175 degrees
+  // Cap at 5 * PI / 6
   long double view_angle_v;
 
 } RT_Camera;
@@ -95,7 +103,7 @@ typedef struct RT_Camera {
 /*
  * Perform raytracing with a single ray to get a single RGB tuple.
  */
-RT_RGB raytrace(const RT_Scene &scene, const RT_Ray &ray);
+RT_RGB raytrace(const RT_Scene &scene, const RT_Ray &ray, RT_RGB background);
 
 // ------------------------------------------------------------
 
@@ -105,7 +113,24 @@ RT_RGB raytrace(const RT_Scene &scene, const RT_Ray &ray);
  * The returned array is row-major, left-to-right; consecutive tuples represent
  * horizontally neighbor pixels (besides at the row edges).
  */
-std::vector<RT_RGB> raytrace(const RT_Scene &scene, const RT_Camera &camera);
+std::vector<RT_RGB> raytrace(const RT_Scene &scene, const RT_Camera &camera,
+RT_RGB background);
+
+// ------------------------------------------------------------
+
+/*
+ * Calculate the proportion-preserving angle of view for an axis from that of
+ * the other axis.
+ * In other words, if the vertical angle of view is given, this function
+ * calculates the horizontal angle of view such that the vertical and horizontal
+ * scales remain equal. The opposite is also possible; given the horizontal
+ * angle of view, the vertical angle of view is calculated.
+ * length_a is the length of the view with respect to the axis corresponding to
+ * aov_a. i.e. If aov_a is the vertical angle of view, length_a must specify the
+ * height of the view and length_b the width of the view.
+ */
+long double proportional_aov(long double aov_a, long double length_a,
+long double length_b);
 
 // ------------------------------------------------------------
 
